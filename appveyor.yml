@@ -127,9 +127,10 @@ build_script:
       $DO_WHEEL = "False"
     }
 
-    $env:DO_TEST = "False"
+    # remove this block later, it is only branch fix (appveyor, not master)
 
     $DO_WHEEL = "True"
+
 
     echo "test=$env:DO_TEST, make_wheel=$DO_WHEEL"
 
@@ -151,6 +152,8 @@ build_script:
       python setup.py build_ext --inplace
       Check-Error
     } else {
+      # until 35 branch is merged, tests wont do any good here and we need DO_WHEEL too
+
       $env:DO_TEST = "False"
       $DO_WHEEL = "True"
       $py35="C:\py35"
@@ -205,9 +208,14 @@ build_script:
       $env:DISTUTILS_USE_SDK=1
       $env:LIB=$PYTHON_ROOT+"\libs;"+$env:LIB
       $env:INCLUDE=$PYTHON_ROOT+"\include;"+$env:INCLUDE
-      (new-object net.webclient).DownloadFile("https://patch-diff.githubusercontent.com/raw/kivy/kivy/pull/4698.patch", "C:\projects\kivy_temp\mismatch.patch")
+
       cd "C:\projects\kivy_temp"
+
+      # pointer mismatch dirty fix
+
+      (new-object net.webclient).DownloadFile("https://patch-diff.githubusercontent.com/raw/kivy/kivy/pull/4698.patch", "C:\projects\kivy_temp\mismatch.patch")
       git apply "mismatch.patch"
+
       $env:PATH=$PYTHON_ROOT+"\share\glew\bin;"+$PYTHON_ROOT+"\share\sdl2\bin;"+$PYTHON_ROOT+"\share\gstreamer\bin;"+$env:PATH
 
       $env:USE_GSTREAMER=0
