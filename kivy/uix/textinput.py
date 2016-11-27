@@ -707,7 +707,8 @@ class TextInput(FocusBehavior, Widget):
         wrap = (self._get_text_width(
             new_text,
             self.tab_width,
-            self._label_cached) > (self.width - self.padding[0] - self.padding[2]))
+            self._label_cached) > (
+                self.width - self.padding[0] - self.padding[2]))
         if len_str > 1 or substring == u'\n' or wrap:
             # Avoid refreshing text on every keystroke.
             # Allows for faster typing of text when the amount of text in
@@ -2840,7 +2841,8 @@ class TextInput(FocusBehavior, Widget):
 
         self._lines_labels[cr] = lbl.texture
         rct.size = lbl.size
-        self._update_graphics()
+        if self.canvas is not None:
+            self._update_graphics()
 
     def get_sel_from(self):
         return self._selection_from
