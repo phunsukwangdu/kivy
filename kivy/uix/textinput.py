@@ -167,6 +167,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.bubble import Bubble
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.image import Image
+from kivy.core.text.markup import MarkupLabel
 
 from kivy.properties import StringProperty, NumericProperty, \
     BooleanProperty, AliasProperty, \
@@ -186,7 +187,6 @@ FL_IS_NEWLINE = FL_IS_LINEBREAK | FL_IS_WORDBREAK
 # late binding
 Clipboard = None
 CutBuffer = None
-MarkupLabel = None
 _platform = platform
 
 # for reloading, we need to keep a list of textinput to retrigger the rendering
@@ -2819,9 +2819,6 @@ class TextInput(FocusBehavior, Widget):
     '''
 
     def on_suggestion_text(self, instance, value):
-        global MarkupLabel
-        if not MarkupLabel:
-            from kivy.core.text.markup import MarkupLabel
 
         cursor_pos = self.cursor_pos
         txt = self._lines[self.cursor_row]
