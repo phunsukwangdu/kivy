@@ -219,7 +219,7 @@ build_script:
 
       python -m pip install pip wheel setuptools --upgrade
       Check-Error
-      pip install mock cython pygments docutils nose kivy.deps.gstreamer $sdl2_file $sdl2_dev_file $glew_file $glew_dev_file $gst_dev_file --extra-index-url https://kivy.org/downloads/packages/simple/
+      pip install mock cython pygments docutils nose kivy.deps.gstreamer $sdl2_file $sdl2_dev_file $glew_file $glew_dev_file kivy.deps.gstreamer_dev --extra-index-url https://kivy.org/downloads/packages/simple/
       Check-Error
 
       Copy-Item "$PYTHON_ROOT\Lib\site-packages\kivy\deps\*" -destination "C:\projects\kivy_temp\kivy\deps" -recurse
