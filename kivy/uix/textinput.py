@@ -1904,9 +1904,10 @@ class TextInput(FocusBehavior, Widget):
         #     - crop the texture coordinates to match the viewport
         #
         # This is the first step of graphics, the second is the selection.
-
         self.canvas.clear()
         add = self.canvas.add
+        if self.suggestion_text:
+            self.on_suggestion_text(self, self.suggestion_text)
 
         lh = self.line_height
         dy = lh + self.line_spacing
@@ -2841,7 +2842,7 @@ class TextInput(FocusBehavior, Widget):
 
         self._lines_labels[cursor_row] = lbl.texture
         rct.size = lbl.size
-        self._update_graphics()
+        # self._update_graphics()
 
     def get_sel_from(self):
         return self._selection_from
