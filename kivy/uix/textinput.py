@@ -1907,8 +1907,9 @@ class TextInput(FocusBehavior, Widget):
         self.canvas.clear()
         add = self.canvas.add
         if self.suggestion_text:
-            self.on_suggestion_text(self, self.suggestion_text)
+            self._add_suggestion_text()
 
+        print("suggestion_ext = {0}".format(self.suggestion_text))
         lh = self.line_height
         dy = lh + self.line_spacing
 
@@ -2819,10 +2820,7 @@ class TextInput(FocusBehavior, Widget):
     defaults to `''`.
     '''
 
-    def on_suggestion_text(self, instance, value):
-
-        if self.canvas is None:
-            return
+    def _add_suggestion_text(self):
 
         cursor_pos = self.cursor_pos
         cursor_row = self.cursor_row
@@ -2831,6 +2829,7 @@ class TextInput(FocusBehavior, Widget):
         rct = self._lines_rects[cursor_row]
 
         lbl = text = None
+        value = self.suggestion_text
         if value:
             lbl = MarkupLabel(
                 text=txt + "[b]{}[/b]".format(value), **kw)
@@ -2842,7 +2841,6 @@ class TextInput(FocusBehavior, Widget):
 
         self._lines_labels[cursor_row] = lbl.texture
         rct.size = lbl.size
-        # self._update_graphics()
 
     def get_sel_from(self):
         return self._selection_from
