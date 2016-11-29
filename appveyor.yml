@@ -130,11 +130,6 @@ build_script:
       $DO_WHEEL = "False"
     }
 
-    # remove this block later, it is only branch fix (appveyor, not master)
-
-    $DO_WHEEL = "True"
-
-
     echo "test=$env:DO_TEST, make_wheel=$DO_WHEEL"
 
 
