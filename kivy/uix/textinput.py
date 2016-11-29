@@ -1909,7 +1909,6 @@ class TextInput(FocusBehavior, Widget):
         if self.suggestion_text:
             self._add_suggestion_text()
 
-        print("suggestion_ext = {0}".format(self.suggestion_text))
         lh = self.line_height
         dy = lh + self.line_spacing
 
