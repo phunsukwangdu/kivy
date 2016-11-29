@@ -3,7 +3,6 @@ branches:
   only:
   - master
   - appveyor
-  - gl-happy
 image: Unstable
 environment:
   WHEEL_DIR: C:\kivy_wheels
@@ -116,6 +115,8 @@ build_script:
       $env:DO_TEST = "False"
     }
 
+
+    $DO_WHEEL = "True"
 
     if ($env:APPVEYOR_REPO_TAG -eq "true"){
       $WHEEL_NAME = "-cp"
@@ -230,6 +231,7 @@ build_script:
       python setup.py build_ext --inplace
       Check-Error
     }
+
 
     if ($DO_WHEEL -eq "True") {
       python setup.py bdist_wheel -d "$env:WHEEL_DIR"
