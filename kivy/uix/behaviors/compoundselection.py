@@ -331,6 +331,7 @@ class CompoundSelectionBehavior(object):
         if (node in self.selected_nodes and (not range_select)):  # selected
             if multiselect:
                 self.deselect_node(node)
+                self._anchor = node
             else:
                 selected_node_count = len(self.selected_nodes)
                 self.clear_selection()
